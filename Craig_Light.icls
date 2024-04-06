@@ -1,22 +1,17 @@
 <scheme name="Craig Light" version="142" parent_scheme="Default">
   <option name="FONT_SCALE" value="1.0" />
   <metaInfo>
-    <property name="created">2022-12-14T12:40:08</property>
     <property name="ide">idea</property>
-    <property name="ideVersion">2022.2.4.0.0</property>
-    <property name="modified">2022-12-14T12:40:40</property>
+    <property name="ideVersion">2024.1.0.0</property>
     <property name="originalScheme">Craig Light</property>
   </metaInfo>
-  <console-font>
-    <option name="EDITOR_FONT_NAME" value="MesloLGS NF" />
-    <option name="EDITOR_FONT_SIZE" value="12" />
-  </console-font>
-  <console-font>
-    <option name="EDITOR_FONT_NAME" value="JetBrains Mono" />
-    <option name="EDITOR_FONT_SIZE" value="12" />
-  </console-font>
+  <option name="LINE_SPACING" value="1.05" />
+  <option name="EDITOR_FONT_SIZE" value="17" />
+  <option name="EDITOR_FONT_NAME" value="MesloLGS NF" />
+  <option name="EDITOR_LIGATURES" value="true" />
+  <option name="CONSOLE_FONT_NAME" value="MesloLGS NF" />
+  <option name="CONSOLE_FONT_SIZE" value="12" />
   <option name="CONSOLE_LIGATURES" value="true" />
-  <option name="CONSOLE_LINE_SPACING" value="1.05" />
   <colors>
     <option name="CARET_ROW_COLOR" value="fcfaed" />
     <option name="GUTTER_BACKGROUND" value="f2f2f2" />
@@ -58,7 +53,6 @@
       <value>
         <option name="FOREGROUND" value="6dcc" />
         <option name="EFFECT_COLOR" value="6dcc" />
-        <option name="EFFECT_TYPE" value="-1" />
       </value>
     </option>
     <option name="CUSTOM_KEYWORD1_ATTRIBUTES" baseAttributes="DEFAULT_KEYWORD" />
