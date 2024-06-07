@@ -1,3 +1,9 @@
+<template name="region" value="&lt;!--region $DESCRIPTION$--&gt;&#10;$SELECTION$&#10;&lt;!--endregion $DESCRIPTION$--&gt;" description="Surround with region marker" toReformat="true" toShortenFQNames="true">
+  <variable name="DESCRIPTION" expression="" defaultValue="&quot;Description&quot;" alwaysStopAt="true" />
+  <context>
+    <option name="XML" value="true" />
+  </context>
+</template>
 <template name="see" value="@see &lt;a href=&quot;$URL$&quot;&gt;$URL$&lt;/a&gt;" description="Add a Javadoc @see url" toReformat="false" toShortenFQNames="false">
   <variable name="URL" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
   <context>
@@ -13,22 +19,37 @@
     <option name="JAVA_EXPRESSION" value="false" />
   </context>
 </template>
-<template name="util" value="private $CLASS$()&#10;{&#10;    throw new AssertionError(&quot;Suppress default constructor for noninstantiability&quot;);&#10;}&#10;" description="Suppress default constructor for noninstantiability" toReformat="false" toShortenFQNames="true">
+<template name="util" value="private $CLASS$()&#10;{&#10;    throw new AssertionError(&quot;Suppress default constructor for noninstantiability&quot;);&#10;}" description="Suppress default constructor for noninstantiability" toReformat="false" toShortenFQNames="true">
   <variable name="CLASS" expression="className()" defaultValue="" alwaysStopAt="true" />
   <context>
     <option name="JAVA_DECLARATION" value="true" />
   </context>
 </template>
-<template name="yet" value="throw new UnsupportedOperationException(this.getClass().getSimpleName() + &quot;.$METHOD$() not implemented yet&quot;);&#10;" description="not implemented yet (Unsupported)" toReformat="false" toShortenFQNames="true">
+<template name="yet" value="throw new UnsupportedOperationException(this.getClass().getSimpleName() + &quot;.$METHOD$() not implemented yet&quot;);" description="not implemented yet (Unsupported)" toReformat="false" toShortenFQNames="true">
   <variable name="METHOD" expression="methodName()" defaultValue="" alwaysStopAt="false" />
   <context>
     <option name="JAVA_STATEMENT" value="true" />
   </context>
 </template>
-<template name="Log" value="private static final org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger($CLASS$.class);" description="Slf4j Logger" toReformat="false" toShortenFQNames="true">
+<template name="Log" value="private static final org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger($CLASS$.class);" description="Slf4j Logger" toReformat="true" toShortenFQNames="true">
   <variable name="CLASS" expression="className()" defaultValue="" alwaysStopAt="true" />
   <context>
     <option name="JAVA_DECLARATION" value="true" />
+  </context>
+</template>
+<template name="logm" value="$LOGGER$.info(&quot;$CLASS_NAME$.$METHOD_NAME$&quot;);" description="Logs current class and method names to System.out" toReformat="true" toShortenFQNames="true">
+  <variable name="LOGGER" expression="variableOfType(&quot;Logger&quot;)" defaultValue="LOGGER" alwaysStopAt="true" />
+  <variable name="CLASS_NAME" expression="className()" defaultValue="" alwaysStopAt="false" />
+  <variable name="METHOD_NAME" expression="methodName()" defaultValue="" alwaysStopAt="false" />
+  <context>
+    <option name="JAVA_STATEMENT" value="true" />
+  </context>
+</template>
+<template name="logp" value="$LOGGER$.info($FORMAT$);" description="Logs method parameter names and values to System.out" toReformat="true" toShortenFQNames="true">
+  <variable name="LOGGER" expression="variableOfType(&quot;Logger&quot;)" defaultValue="LOGGER" alwaysStopAt="true" />
+  <variable name="FORMAT" expression="groovyScript(&quot;import com.intellij.psi.*;import com.intellij.psi.util.PsiTreeUtil; def file = PsiDocumentManager.getInstance(_editor.project).getPsiFile(_editor.document); PsiMethod method = PsiTreeUtil.findElementOfClassAtOffset(file, _editor.caretModel.offset, PsiMethod.class, false); PsiParameter[] parameters = method == null ? PsiParameter.EMPTY_ARRAY : method.parameterList.parameters; return parameters.size() == 0 ? '' : '\&quot;' + parameters.collect { def prefix = it.name + ' = '; def type = it.type; return type instanceof PsiArrayType ? type.componentType instanceof PsiPrimitiveType ? prefix + '\&quot; + java.util.Arrays.toString(' + it.name + ')' : prefix + '\&quot; + java.util.Arrays.deepToString(' + it.name + ')' : prefix + '\&quot; + ' + it.name }.join(' + \&quot;, ')&quot;, methodParameters())" defaultValue="" alwaysStopAt="false" />
+  <context>
+    <option name="JAVA_STATEMENT" value="true" />
   </context>
 </template>
 <template name="logv" value="$LOGGER$.info(&quot;$EXPR_COPY$ = {}&quot;, $EXPR$);" description="Logs a value to LOGGER.info" toReformat="true" toShortenFQNames="true">
@@ -39,9 +60,16 @@
     <option name="JAVA_STATEMENT" value="true" />
   </context>
 </template>
-<template name="Mark" value="private static final org.slf4j.Marker MARKER = org.slf4j.MarkerFactory.getMarker(&quot;$END$&quot;);" description="Slf4j Marker" toReformat="false" toShortenFQNames="true">
+<template name="Mark" value="private static final org.slf4j.Marker MARKER = org.slf4j.MarkerFactory.getMarker(&quot;$END$&quot;);" description="Slf4j Marker" toReformat="true" toShortenFQNames="true">
   <context>
     <option name="JAVA_DECLARATION" value="true" />
+  </context>
+</template>
+<template name="formatteroff" value="// @formatter:off&#10;$SELECTION$&#10;// @formatter:on&#10;" description="Surround with formatter off" toReformat="false" toShortenFQNames="true">
+  <context>
+    <option name="COMPLETION" value="false" />
+    <option name="JAVA_CODE" value="true" />
+    <option name="JAVA_STRING" value="false" />
   </context>
 </template>
 <template name="nn" value="java.util.Objects.requireNonNull($SELECTION$)" description="requireNonNull" toReformat="false" toShortenFQNames="true">
